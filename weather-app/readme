@@ -1,0 +1,12 @@
+# Weather App - MERN Stack
+
+A full-stack weather application with user authentication.
+
+## Features
+- JWT Authentication (login/signup)
+- City search with autocomplete
+- Real-time temperature & humidity
+- OpenWeatherMap API integration
+
+## Tech Stack
+MongoDB, Express.js, React.js, Node.js
