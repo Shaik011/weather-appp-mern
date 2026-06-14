@@ -9,12 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// User Schema
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -22,7 +20,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// Middleware to verify token
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "No token provided" });
@@ -34,7 +31,6 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// Sign Up
 app.post("/api/signup", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -49,7 +45,6 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-// Login
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -66,7 +61,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Fetch weather (protected route)
+
 app.get("/api/weather", verifyToken, async (req, res) => {
   const { city } = req.query;
   if (!city) return res.status(400).json({ message: "City is required" });

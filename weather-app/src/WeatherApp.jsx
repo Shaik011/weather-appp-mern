@@ -37,7 +37,7 @@ export default function WeatherApp() {
     setSuggestions([]);
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:5000/api/weather?city=${query}`, {
+      const res = await fetch(`https://weather-appp-mern.onrender.com/api/weather?city=${query}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -107,6 +107,9 @@ export default function WeatherApp() {
       {!weather && !error && (
         <p className="placeholder-msg">Search for a city to see the weather.</p>
       )}
+      <footer className="footer">
+        Done by Mohammed Shaik Ahmed (PES1PG25CA297)
+      </footer>
     </div>
   );
 }
